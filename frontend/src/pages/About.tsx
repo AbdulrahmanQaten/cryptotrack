@@ -1,45 +1,61 @@
-import { useLanguage } from '@/contexts/LanguageContext';
-import { BarChart3, Wallet, Newspaper, TrendingUp, Shield, Zap, Globe, Search, Fuel, Briefcase } from 'lucide-react';
+import { useLanguage } from "@/contexts/LanguageContext";
+import { usePageTitle } from "@/hooks/usePageTitle";
+import {
+  BarChart3,
+  Wallet,
+  Newspaper,
+  TrendingUp,
+  Shield,
+  Zap,
+  Globe,
+  Search,
+  Fuel,
+  Briefcase,
+} from "lucide-react";
 
 const About = () => {
+  usePageTitle("title.about");
   const { t } = useLanguage();
 
   const features = [
     {
       icon: <TrendingUp className="w-8 h-8" />,
-      title: t('about.feature1'),
-      description: t('about.fastDesc'),
+      title: t("about.feature1"),
+      description: t("about.fastDesc"),
     },
     {
       icon: <Wallet className="w-8 h-8" />,
-      title: t('about.feature2'),
-      description: t('about.secureDesc'),
+      title: t("about.feature2"),
+      description: t("about.secureDesc"),
     },
     {
       icon: <BarChart3 className="w-8 h-8" />,
-      title: t('about.feature3'),
-      description: t('about.fastDesc'),
+      title: t("about.feature3"),
+      description: t("about.fastDesc"),
     },
     {
       icon: <Newspaper className="w-8 h-8" />,
-      title: t('about.feature4'),
-      description: t('about.multilingualDesc'),
+      title: t("about.feature4"),
+      description: t("about.multilingualDesc"),
     },
   ];
 
   const stats = [
-    { value: '10+', label: t('about.stats.cryptos') },
-    { value: '24/7', label: t('about.stats.updates') },
-    { value: '100%', label: t('about.stats.free') },
-    { value: '2', label: t('about.stats.languages') },
+    { value: "10+", label: t("about.stats.cryptos") },
+    { value: "24/7", label: t("about.stats.updates") },
+    { value: "100%", label: t("about.stats.free") },
+    { value: "2", label: t("about.stats.languages") },
   ];
 
   const appFeatures = [
-    { icon: <Wallet className="w-6 h-6" />, text: t('home.subtitle') },
-    { icon: <Search className="w-6 h-6" />, text: t('market.search').replace('...', '') },
-    { icon: <TrendingUp className="w-6 h-6" />, text: t('about.feature1') },
-    { icon: <Fuel className="w-6 h-6" />, text: t('about.feature3') },
-    { icon: <Briefcase className="w-6 h-6" />, text: t('about.feature2') },
+    { icon: <Wallet className="w-6 h-6" />, text: t("home.subtitle") },
+    {
+      icon: <Search className="w-6 h-6" />,
+      text: t("market.search").replace("...", ""),
+    },
+    { icon: <TrendingUp className="w-6 h-6" />, text: t("about.feature1") },
+    { icon: <Fuel className="w-6 h-6" />, text: t("about.feature3") },
+    { icon: <Briefcase className="w-6 h-6" />, text: t("about.feature2") },
   ];
 
   return (
@@ -49,9 +65,11 @@ const About = () => {
         <div className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6">
           <Globe className="w-10 h-10 text-primary" />
         </div>
-        <h1 className="text-3xl md:text-5xl font-bold mb-4">{t('about.title')}</h1>
+        <h1 className="text-3xl md:text-5xl font-bold mb-4">
+          {t("about.title")}
+        </h1>
         <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-          {t('about.subtitle')}
+          {t("about.subtitle")}
         </p>
       </section>
 
@@ -73,9 +91,11 @@ const About = () => {
 
       {/* Mission */}
       <section className="flat-card p-8 md:p-12 mb-12 text-center">
-        <h2 className="text-2xl md:text-3xl font-bold mb-4">{t('about.mission')}</h2>
+        <h2 className="text-2xl md:text-3xl font-bold mb-4">
+          {t("about.mission")}
+        </h2>
         <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-          {t('about.missionText')}
+          {t("about.missionText")}
         </p>
       </section>
 
@@ -87,7 +107,9 @@ const About = () => {
             className="flat-card p-6 text-center animate-fade-in"
             style={{ animationDelay: `${index * 0.1}s` }}
           >
-            <p className="text-3xl md:text-4xl font-bold text-primary mb-2">{stat.value}</p>
+            <p className="text-3xl md:text-4xl font-bold text-primary mb-2">
+              {stat.value}
+            </p>
             <p className="text-muted-foreground">{stat.label}</p>
           </div>
         ))}
@@ -95,7 +117,7 @@ const About = () => {
 
       {/* Features */}
       <section className="mb-12">
-        <h2 className="section-title text-center">{t('about.features')}</h2>
+        <h2 className="section-title text-center">{t("about.features")}</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {features.map((feature, index) => (
             <div
@@ -115,33 +137,35 @@ const About = () => {
 
       {/* Why Choose Us */}
       <section className="flat-card p-8 md:p-12">
-        <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">{t('about.whyChoose')}</h2>
+        <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
+          {t("about.whyChoose")}
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="text-center">
             <div className="w-16 h-16 rounded-full bg-success/10 flex items-center justify-center mx-auto mb-4">
               <Shield className="w-8 h-8 text-success" />
             </div>
-            <h3 className="font-bold mb-2">{t('about.secure')}</h3>
+            <h3 className="font-bold mb-2">{t("about.secure")}</h3>
             <p className="text-sm text-muted-foreground">
-              {t('about.secureDesc')}
+              {t("about.secureDesc")}
             </p>
           </div>
           <div className="text-center">
             <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
               <Zap className="w-8 h-8 text-primary" />
             </div>
-            <h3 className="font-bold mb-2">{t('about.fast')}</h3>
+            <h3 className="font-bold mb-2">{t("about.fast")}</h3>
             <p className="text-sm text-muted-foreground">
-              {t('about.fastDesc')}
+              {t("about.fastDesc")}
             </p>
           </div>
           <div className="text-center">
             <div className="w-16 h-16 rounded-full bg-warning/10 flex items-center justify-center mx-auto mb-4">
               <Globe className="w-8 h-8 text-warning" />
             </div>
-            <h3 className="font-bold mb-2">{t('about.multilingual')}</h3>
+            <h3 className="font-bold mb-2">{t("about.multilingual")}</h3>
             <p className="text-sm text-muted-foreground">
-              {t('about.multilingualDesc')}
+              {t("about.multilingualDesc")}
             </p>
           </div>
         </div>

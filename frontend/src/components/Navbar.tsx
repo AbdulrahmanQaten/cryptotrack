@@ -1,15 +1,15 @@
-import { Link, useLocation } from 'react-router-dom';
-import { useLanguage } from '@/contexts/LanguageContext';
-import { useTheme } from '@/contexts/ThemeContext';
-import { useState } from 'react';
-import { Menu, X, Sun, Moon, Monitor, Languages } from 'lucide-react';
+import { Link, useLocation } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
+import { useState } from "react";
+import { Menu, X, Sun, Moon, Monitor, Languages } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Button } from '@/components/ui/button';
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
 
 export function Navbar() {
   const { t, language, setLanguage } = useLanguage();
@@ -18,13 +18,13 @@ export function Navbar() {
   const location = useLocation();
 
   const navLinks = [
-    { path: '/', label: t('nav.home') },
-    { path: '/market', label: t('nav.market') },
-    { path: '/wallet', label: t('nav.wallet') },
-    { path: '/transaction', label: t('nav.transaction') },
-    { path: '/portfolio', label: t('nav.portfolio') },
-    { path: '/news', label: t('nav.news') },
-    { path: '/about', label: t('nav.about') },
+    { path: "/", label: t("nav.home") },
+    { path: "/market", label: t("nav.market") },
+    { path: "/wallet", label: t("nav.wallet") },
+    { path: "/transaction", label: t("nav.transaction") },
+    { path: "/portfolio", label: t("nav.portfolio") },
+    { path: "/news", label: t("nav.news") },
+    { path: "/about", label: t("nav.about") },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -39,8 +39,12 @@ export function Navbar() {
               ₿
             </div>
             <div className="hidden sm:block">
-              <span className="text-lg font-bold text-foreground">Blockchain</span>
-              <span className="text-lg font-bold text-primary ms-1">Tracker</span>
+              <span className="text-lg font-bold text-foreground">
+                Blockchain
+              </span>
+              <span className="text-lg font-bold text-primary ms-1">
+                Tracker
+              </span>
             </div>
           </Link>
 
@@ -52,8 +56,8 @@ export function Navbar() {
                 to={link.path}
                 className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 ${
                   isActive(link.path)
-                    ? 'bg-primary text-primary-foreground shadow-flat-active'
-                    : 'text-muted-foreground hover:text-foreground hover:bg-secondary'
+                    ? "bg-primary text-primary-foreground shadow-flat-active"
+                    : "text-muted-foreground hover:text-foreground hover:bg-secondary"
                 }`}
               >
                 {link.label}
@@ -66,26 +70,30 @@ export function Navbar() {
             {/* Language Switcher */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button 
-                  variant="ghost" 
-                  size="icon" 
+                <Button
+                  variant="ghost"
+                  size="icon"
                   className="h-9 w-9 rounded-lg hover:bg-secondary"
                 >
                   <Languages className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="min-w-32">
-                <DropdownMenuItem 
-                  onClick={() => setLanguage('en')}
-                  className={language === 'en' ? 'bg-primary/10 text-primary' : ''}
-                >
-                  English
-                </DropdownMenuItem>
-                <DropdownMenuItem 
-                  onClick={() => setLanguage('ar')}
-                  className={language === 'ar' ? 'bg-primary/10 text-primary' : ''}
+                <DropdownMenuItem
+                  onClick={() => setLanguage("ar")}
+                  className={
+                    language === "ar" ? "bg-primary/10 text-primary" : ""
+                  }
                 >
                   العربية
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() => setLanguage("en")}
+                  className={
+                    language === "en" ? "bg-primary/10 text-primary" : ""
+                  }
+                >
+                  English
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -93,12 +101,12 @@ export function Navbar() {
             {/* Theme Switcher */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button 
-                  variant="ghost" 
-                  size="icon" 
+                <Button
+                  variant="ghost"
+                  size="icon"
                   className="h-9 w-9 rounded-lg hover:bg-secondary"
                 >
-                  {resolvedTheme === 'dark' ? (
+                  {resolvedTheme === "dark" ? (
                     <Moon className="h-4 w-4" />
                   ) : (
                     <Sun className="h-4 w-4" />
@@ -106,26 +114,32 @@ export function Navbar() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="min-w-32">
-                <DropdownMenuItem 
-                  onClick={() => setTheme('light')}
-                  className={theme === 'light' ? 'bg-primary/10 text-primary' : ''}
+                <DropdownMenuItem
+                  onClick={() => setTheme("light")}
+                  className={
+                    theme === "light" ? "bg-primary/10 text-primary" : ""
+                  }
                 >
                   <Sun className="h-4 w-4 me-2" />
-                  Light
+                  {language === "ar" ? "فاتح" : "Light"}
                 </DropdownMenuItem>
-                <DropdownMenuItem 
-                  onClick={() => setTheme('dark')}
-                  className={theme === 'dark' ? 'bg-primary/10 text-primary' : ''}
+                <DropdownMenuItem
+                  onClick={() => setTheme("dark")}
+                  className={
+                    theme === "dark" ? "bg-primary/10 text-primary" : ""
+                  }
                 >
                   <Moon className="h-4 w-4 me-2" />
-                  Dark
+                  {language === "ar" ? "داكن" : "Dark"}
                 </DropdownMenuItem>
-                <DropdownMenuItem 
-                  onClick={() => setTheme('system')}
-                  className={theme === 'system' ? 'bg-primary/10 text-primary' : ''}
+                <DropdownMenuItem
+                  onClick={() => setTheme("system")}
+                  className={
+                    theme === "system" ? "bg-primary/10 text-primary" : ""
+                  }
                 >
                   <Monitor className="h-4 w-4 me-2" />
-                  System
+                  {language === "ar" ? "النظام" : "System"}
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -137,7 +151,11 @@ export function Navbar() {
               className="h-9 w-9 rounded-lg hover:bg-secondary md:hidden"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {isMenuOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
             </Button>
           </div>
         </div>
@@ -153,8 +171,8 @@ export function Navbar() {
                   onClick={() => setIsMenuOpen(false)}
                   className={`block px-4 py-3 rounded-lg font-medium transition-all duration-200 ${
                     isActive(link.path)
-                      ? 'bg-primary text-primary-foreground'
-                      : 'text-muted-foreground hover:text-foreground hover:bg-secondary'
+                      ? "bg-primary text-primary-foreground"
+                      : "text-muted-foreground hover:text-foreground hover:bg-secondary"
                   }`}
                 >
                   {link.label}

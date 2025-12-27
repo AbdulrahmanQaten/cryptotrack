@@ -1,9 +1,17 @@
-import { useState, useEffect } from 'react';
-import { useLanguage } from '@/contexts/LanguageContext';
-import { useCryptoData } from '@/hooks/useCryptoData';
-import { formatPrice, formatPercentage } from '@/lib/cryptoData';
-import { Plus, Wallet, TrendingUp, TrendingDown, Trash2, Loader2 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { useState, useEffect } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { usePageTitle } from "@/hooks/usePageTitle";
+import { useCryptoData } from "@/hooks/useCryptoData";
+import { formatPrice, formatPercentage } from "@/lib/cryptoData";
+import {
+  Plus,
+  Wallet,
+  TrendingUp,
+  TrendingDown,
+  Trash2,
+  Loader2,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -11,16 +19,16 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from "@/components/ui/select";
 
 interface Holding {
   coinId: string;
@@ -29,24 +37,30 @@ interface Holding {
 }
 
 const Portfolio = () => {
+  usePageTitle("title.portfolio");
   const { t } = useLanguage();
   const { data: cryptocurrencies, isLoading } = useCryptoData();
-  
+
   // Load holdings from localStorage
   const [holdings, setHoldings] = useState<Holding[]>(() => {
-    const saved = localStorage.getItem('portfolio-holdings');
+    const saved = localStorage.getItem("portfolio-holdings");
     return saved ? JSON.parse(saved) : [];
   });
-  
+
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [newHolding, setNewHolding] = useState({ coinId: '', amount: '', buyPrice: '' });
+  const [newHolding, setNewHolding] = useState({
+    coinId: "",
+    amount: "",
+    buyPrice: "",
+  });
 
   // Save holdings to localStorage whenever they change
   useEffect(() => {
-    localStorage.setItem('portfolio-holdings', JSON.stringify(holdings));
+    localStorage.setItem("portfolio-holdings", JSON.stringify(holdings));
   }, [holdings]);
 
-  const getCoinData = (coinId: string) => cryptocurrencies?.find((c) => c.id === coinId);
+  const getCoinData = (coinId: string) =>
+    cryptocurrencies?.find((c) => c.id === coinId);
 
   const calculatePortfolioValue = () => {
     return holdings.reduce((total, holding) => {
@@ -84,7 +98,7 @@ const Portfolio = () => {
           buyPrice: parseFloat(newHolding.buyPrice),
         },
       ]);
-      setNewHolding({ coinId: '', amount: '', buyPrice: '' });
+      setNewHolding({ coinId: "", amount: "", buyPrice: "" });
       setIsDialogOpen(false);
     }
   };
@@ -108,8 +122,10 @@ const Portfolio = () => {
     <div className="page-container">
       {/* Header */}
       <section className="mb-8">
-        <h1 className="text-3xl md:text-4xl font-bold mb-2">{t('portfolio.title')}</h1>
-        <p className="text-muted-foreground">{t('portfolio.subtitle')}</p>
+        <h1 className="text-3xl md:text-4xl font-bold mb-2">
+          {t("portfolio.title")}
+        </h1>
+        <p className="text-muted-foreground">{t("portfolio.subtitle")}</p>
       </section>
 
       {/* Stats */}
@@ -120,8 +136,12 @@ const Portfolio = () => {
               <Wallet className="w-6 h-6 text-primary" />
             </div>
             <div>
-              <p className="text-sm text-muted-foreground">{t('portfolio.totalValue')}</p>
-              <p className="text-2xl font-bold">{formatPrice(portfolioValue)}</p>
+              <p className="text-sm text-muted-foreground">
+                {t("portfolio.totalValue")}
+              </p>
+              <p className="text-2xl font-bold">
+                {formatPrice(portfolioValue)}
+              </p>
             </div>
           </div>
         </div>
@@ -130,7 +150,7 @@ const Portfolio = () => {
           <div className="flex items-center gap-3 mb-2">
             <div
               className={`w-12 h-12 rounded-lg flex items-center justify-center ${
-                portfolioChange >= 0 ? 'bg-success/10' : 'bg-destructive/10'
+                portfolioChange >= 0 ? "bg-success/10" : "bg-destructive/10"
               }`}
             >
               {portfolioChange >= 0 ? (
@@ -140,10 +160,12 @@ const Portfolio = () => {
               )}
             </div>
             <div>
-              <p className="text-sm text-muted-foreground">{t('portfolio.totalChange')}</p>
+              <p className="text-sm text-muted-foreground">
+                {t("portfolio.totalChange")}
+              </p>
               <p
                 className={`text-2xl font-bold ${
-                  portfolioChange >= 0 ? 'text-success' : 'text-destructive'
+                  portfolioChange >= 0 ? "text-success" : "text-destructive"
                 }`}
               >
                 {formatPercentage(portfolioChange)}
@@ -156,36 +178,42 @@ const Portfolio = () => {
       {/* Holdings */}
       <section>
         <div className="flex items-center justify-between mb-6">
-          <h2 className="section-title mb-0">{t('portfolio.holdings')}</h2>
+          <h2 className="section-title mb-0">{t("portfolio.holdings")}</h2>
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogTrigger asChild>
               <Button className="flat-button">
                 <Plus className="w-4 h-4 me-2" />
-                {t('portfolio.addAsset')}
+                {t("portfolio.addAsset")}
               </Button>
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
-                <DialogTitle>{t('portfolio.addAsset')}</DialogTitle>
+                <DialogTitle>{t("portfolio.addAsset")}</DialogTitle>
                 <DialogDescription>
-                  {t('portfolio.addAssetDescription')}
+                  {t("portfolio.addAssetDescription")}
                 </DialogDescription>
               </DialogHeader>
               <div className="space-y-4 py-4">
                 <div className="space-y-2">
-                  <Label>{t('portfolio.coin')}</Label>
+                  <Label>{t("portfolio.coin")}</Label>
                   <Select
                     value={newHolding.coinId}
-                    onValueChange={(value) => setNewHolding({ ...newHolding, coinId: value })}
+                    onValueChange={(value) =>
+                      setNewHolding({ ...newHolding, coinId: value })
+                    }
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder={t('portfolio.selectCoin')} />
+                      <SelectValue placeholder={t("portfolio.selectCoin")} />
                     </SelectTrigger>
                     <SelectContent>
                       {cryptocurrencies?.map((coin) => (
                         <SelectItem key={coin.id} value={coin.id}>
                           <div className="flex items-center gap-2">
-                            <img src={coin.image} alt={coin.name} className="w-5 h-5 rounded-full" />
+                            <img
+                              src={coin.image}
+                              alt={coin.name}
+                              className="w-5 h-5 rounded-full"
+                            />
                             {coin.name} ({coin.symbol})
                           </div>
                         </SelectItem>
@@ -194,27 +222,31 @@ const Portfolio = () => {
                   </Select>
                 </div>
                 <div className="space-y-2">
-                  <Label>{t('portfolio.amount')}</Label>
+                  <Label>{t("portfolio.amount")}</Label>
                   <Input
                     type="number"
                     step="0.0001"
                     value={newHolding.amount}
-                    onChange={(e) => setNewHolding({ ...newHolding, amount: e.target.value })}
+                    onChange={(e) =>
+                      setNewHolding({ ...newHolding, amount: e.target.value })
+                    }
                     placeholder="0.00"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label>{t('portfolio.buyPrice')}</Label>
+                  <Label>{t("portfolio.buyPrice")}</Label>
                   <Input
                     type="number"
                     step="0.01"
                     value={newHolding.buyPrice}
-                    onChange={(e) => setNewHolding({ ...newHolding, buyPrice: e.target.value })}
+                    onChange={(e) =>
+                      setNewHolding({ ...newHolding, buyPrice: e.target.value })
+                    }
                     placeholder="0.00"
                   />
                 </div>
                 <Button onClick={addHolding} className="w-full flat-button">
-                  {t('common.save')}
+                  {t("common.save")}
                 </Button>
               </div>
             </DialogContent>
@@ -224,7 +256,7 @@ const Portfolio = () => {
         {holdings.length === 0 ? (
           <div className="flat-card p-12 text-center">
             <Wallet className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
-            <p className="text-muted-foreground">{t('portfolio.noAssets')}</p>
+            <p className="text-muted-foreground">{t("portfolio.noAssets")}</p>
           </div>
         ) : (
           <div className="space-y-4">
@@ -235,14 +267,19 @@ const Portfolio = () => {
               const currentValue = coin.price * holding.amount;
               const costBasis = holding.buyPrice * holding.amount;
               const profitLoss = currentValue - costBasis;
-              const profitLossPercent = ((currentValue - costBasis) / costBasis) * 100;
+              const profitLossPercent =
+                ((currentValue - costBasis) / costBasis) * 100;
 
               return (
-                <div key={index} className="flat-card p-4 animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
+                <div
+                  key={index}
+                  className="flat-card p-4 animate-fade-in"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
                   <div className="flex items-center justify-between flex-wrap gap-4">
                     <div className="flex items-center gap-4">
-                      <img 
-                        src={coin.image} 
+                      <img
+                        src={coin.image}
                         alt={coin.name}
                         className="w-12 h-12 rounded-full"
                       />
@@ -256,19 +293,26 @@ const Portfolio = () => {
 
                     <div className="flex items-center gap-8">
                       <div className="text-end">
-                        <p className="text-sm text-muted-foreground">{t('portfolio.value')}</p>
+                        <p className="text-sm text-muted-foreground">
+                          {t("portfolio.value")}
+                        </p>
                         <p className="font-bold">{formatPrice(currentValue)}</p>
                       </div>
 
                       <div className="text-end">
-                        <p className="text-sm text-muted-foreground">{t('portfolio.pl')}</p>
+                        <p className="text-sm text-muted-foreground">
+                          {t("portfolio.pl")}
+                        </p>
                         <p
                           className={`font-bold ${
-                            profitLoss >= 0 ? 'text-success' : 'text-destructive'
+                            profitLoss >= 0
+                              ? "text-success"
+                              : "text-destructive"
                           }`}
                         >
-                          {profitLoss >= 0 ? '+' : ''}
-                          {formatPrice(profitLoss)} ({formatPercentage(profitLossPercent)})
+                          {profitLoss >= 0 ? "+" : ""}
+                          {formatPrice(profitLoss)} (
+                          {formatPercentage(profitLossPercent)})
                         </p>
                       </div>
 
