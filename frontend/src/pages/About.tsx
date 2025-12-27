@@ -41,7 +41,7 @@ const About = () => {
   ];
 
   const stats = [
-    { value: "10+", label: t("about.stats.cryptos") },
+    { value: "100", label: t("about.stats.cryptos") },
     { value: "24/7", label: t("about.stats.updates") },
     { value: "100%", label: t("about.stats.free") },
     { value: "2", label: t("about.stats.languages") },
