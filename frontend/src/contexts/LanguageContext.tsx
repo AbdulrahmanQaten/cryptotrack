@@ -27,7 +27,7 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.transaction": "Transaction Explorer",
 
     // Page Titles
-    "title.home": "Blockchain Tracker - Crypto Market Tracker",
+    "title.home": "Blockchain Tracker",
     "title.market": "Cryptocurrency Market - Blockchain Tracker",
     "title.portfolio": "My Portfolio - Blockchain Tracker",
     "title.wallet": "Wallet Tracker - Blockchain Tracker",
@@ -212,7 +212,7 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.transaction": "مستكشف المعاملات",
 
     // Page Titles
-    "title.home": "متتبع البلوكتشين - متتبع سوق الكريبتو",
+    "title.home": "متتبع البلوكتشين",
     "title.market": "سوق العملات الرقمية - متتبع البلوكتشين",
     "title.portfolio": "محفظتي - متتبع البلوكتشين",
     "title.wallet": "متتبع المحفظة - متتبع البلوكتشين",
